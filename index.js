@@ -43,10 +43,11 @@ mongoose.connect(process.env.MONGO_URL, {
   app.use("/api/posts", postRoute);
   app.use("/api/categories", categoryRoute);
 
-  app.use(express.static(path.join(__dirname, "/client/build")));
+  app.use(express.static('/client/build'));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+  res.sendFile(require('path')
+    .resolve(__dirname, 'client', 'build', 'index.html'),);
 });
   
 app.listen(process.env.PORT || 5000, () => {
